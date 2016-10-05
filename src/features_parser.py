@@ -1,4 +1,5 @@
 from re import split
+from location_parser import parse_location
 
 FEATURE_START_SPACE = ' ' * 5
 
@@ -48,7 +49,7 @@ def __parse_string(gbp, current_remaining):
 class Feature(object):
 	def __init__(self, name, location, attributes):
 		self.name = name
-		self.location = location
+		self.location = parse_location(location)
 		self.attributes = attributes
 
 	def has_attribute(self, attribute):

@@ -127,7 +127,7 @@ def __parse_publications(gbp):
 
 
 def __parse_comment(gbp):
-    """ Parses the comment of this GenBank file.
+    """ Parses the comment and PRIMARY keyword of this GenBank file.
 
         Parameters:
             gbp - GenbankParser object
@@ -139,17 +139,18 @@ def __parse_comment(gbp):
     # Only eat the comment when it is available
     gbp.handle_multiline_keyword('COMMENT', do_split=False,
                                  remove_keyword=False, raise_error=False)
+    gbp.handle_multiline_keyword('PRIMARY', do_split=False,
+                                 remove_keyword=False, raise_error=False)
     return []
 
 
 class Metadata(object):
-    def __init__(self, locus_name, seq_length, unit, molecule_type, formation,
+    def __init__(self, locus_name, seq_length, molecule_type, formation,
                  gb_division, modification_date, description, accession,
                  version, keywords, source, organism,
                  publications):
         self.locus_name = locus_name
         self.seq_length = int(seq_length)
-        self.unit_length = unit
         self.molecule_type = molecule_type
         self.division = gb_division
         self.molecule_formation = formation

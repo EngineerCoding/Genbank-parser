@@ -266,5 +266,8 @@ class GenbankParser(object):
         """ Closes the file handle """
         self.filehandle.close()
 
+    def __enter__(self):
+        return self
+
     def __exit__(self, *args):
         self.close()

@@ -119,7 +119,7 @@ class GenbankParser(object):
 
         """
         # A variable to store the last line in
-        line = ''
+        line = ' '
         # A varibale to store the position in before the last read line
         last_position = 0
         # Keep checking until we have line which starts with the
@@ -128,7 +128,7 @@ class GenbankParser(object):
             # Still not found, so read a line and store the position
             # before this line
             last_position = self.filehandle.tell()
-            line = self.read_valid_line()
+            line = self.read_valid_line().strip()
         # If the line evaluates to false, the end of the file has
         # been reached
         if not line:
@@ -146,6 +146,9 @@ class GenbankParser(object):
         content = '\n'
         while content == '\n':
             content = self.filehandle.readline()
+            # Check if the line is full of whitespace
+            if len(content) > 1 and len(content.strip()) == 0:
+                content = '\n'
         return content
 
     def get_continuing_line(self):

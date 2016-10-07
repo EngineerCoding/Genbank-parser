@@ -11,7 +11,7 @@ with GenbankParser('myfile.gb') as parser:
   # The following methods have to be called to properly parse a Genbank file
   parser.parse_metadata() # Optional to actually store this data
   parser.parse_features() # Optional to actually store this data
-  parse.parse_origin() # Optional to actually store this data
+  parser.parse_origin() # Optional to actually store this data
 ```
 
 Currently there is about no documentation, so code has to be read to understand what it does. Documentation is the current priority though.

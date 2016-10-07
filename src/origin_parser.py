@@ -85,7 +85,7 @@ class Sequence(object):
         """
         return len(self.sequence)
 
-    def get_sequence_from_location(self, location, sequence):
+    def get_sequence_from_location(self, location, sequence=None):
         """ Gets the sequence for the location. For this the method
         'get_range' is used for to determine what parts to use.
         TODO: Currently RemoteLocation is a special case, but this
@@ -96,8 +96,8 @@ class Sequence(object):
                 A location object which specifies the range of the
                 sequence
             sequence - Sequence object. Default: None.
-            Alternative sequence to use for a RemoteLocation, will
-            be removed in the future.
+                Alternative sequence to use for a RemoteLocation, will
+                be removed in the future.
         Returns:
             A string sequence representing the sequence for the
             location.

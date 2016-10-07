@@ -371,7 +371,7 @@ class ComplementLocation(JoinedLocation):
         for location in self.locations:
             first = genome_length - location.second + 1
             second = location.second - location.first + first
-            new_locations.append(RangeLocation('{}..{}'.format(first, second))
+            new_locations.append(RangeLocation('{}..{}'.format(first, second)))
         return JoinedLocation(*new_locations)
 
     def get_complement_sequences(self, sequence):

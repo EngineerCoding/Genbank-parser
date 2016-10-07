@@ -1,7 +1,4 @@
-from enum import Enum
-
-
-class LocationType(Enum):
+class LocationType:
     """ All the location types which can occur in a Genbank file """
     single_base = 'single_base'
     adjoining = 'adjoining'
@@ -10,13 +7,13 @@ class LocationType(Enum):
     remote = 'remote'
 
 
-class AdjoiningLocationType(Enum):
+class AdjoiningLocationType:
     """ All the types of Adjoining"""
     endonucleolytic = 'endonucleolytic'
     circulair = 'circulair'
 
 
-class Location:
+class Location(object):
     """ The base type of location which implement the most basic methods
     for sub classes.
     """
@@ -129,7 +126,7 @@ class SingleBaseLocation(Location):
     type = LocationType.single_base
 
     def __init__(self, location_string):
-        super().__init__(location_string)
+        super(SingleBaseLocation, self).__init__(location_string)
         self.first = self.second = _convert(int, location_string)
 
     def __str__(self):
@@ -161,7 +158,7 @@ class DelimitedLocation(Location):
                and most right element in the list.
             3. _parse_right: parses the most right item of the list
         """
-        super().__init__(location_string)
+        super(DelimitedLocation, self).__init__(location_string)
         # check the delimiter
         if not self.delimiter:
             raise ValueError('Delimiter has to be set!')
@@ -235,7 +232,7 @@ class RangeLocation(DelimitedLocation):
     delimiter = '..'
 
     def __init__(self, string):
-        super().__init__(string)
+        super(RangeLocation, self).__init__(string)
         self.can_be_lesser = False
         self.can_be_greater = False
 
@@ -307,7 +304,7 @@ class JoinedLocation(Location):
     """
 
     def __init__(self, *locations):
-        super().__init__(None)
+        super(JoinedLocation, self).__init__(None)
         self.locations = locations
 
     def calculate_inversed_locations(self, genome_length):
@@ -364,7 +361,7 @@ class JoinedLocation(Location):
 
 class ComplementLocation(JoinedLocation):
     def __init__(self, location):
-        super().__init__(location)
+        super(ComplementLocation, self).__init__(location)
 
     def get_translated_joined(self, genome_length):
         new_locations = []

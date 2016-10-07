@@ -1,6 +1,6 @@
 from re import match, split, IGNORECASE
 
-from location_parser import RemoteLocation
+from .location_parser import RemoteLocation
 
 
 def parse_origin(gbp):

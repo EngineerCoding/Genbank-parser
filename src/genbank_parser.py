@@ -1,9 +1,9 @@
 from os.path import exists
 from re import split
 
-from features_parser import parse_features as parse_actual_features
-from metadata_parser import parse_metadata as parse_actual_metadata
-from origin_parser import parse_origin as parse_actual_origin
+from .features_parser import parse_features as parse_actual_features
+from .metadata_parser import parse_metadata as parse_actual_metadata
+from .origin_parser import parse_origin as parse_actual_origin
 
 CONTINUE_LINE_SPACING = ' ' * 12
 

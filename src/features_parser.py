@@ -1,6 +1,6 @@
 from re import split
 
-from location_parser import parse_location
+from .location_parser import parse_location
 
 FEATURE_START_SPACE = ' ' * 5
 

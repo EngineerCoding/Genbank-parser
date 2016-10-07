@@ -362,21 +362,26 @@ class JoinedLocation(Location):
         return generated_sequence
 
 
-class ComplementLocation(RangeLocation):
-    def __init__(self, range_location):
-        super().__init__(str(range_location))
-        self._5_3_sequence = range_location
+class ComplementLocation(JoinedLocation):
+    def __init__(self, location):
+        super().__init__(location)
 
-    def calculate_3_5_positions(self, genome_length):
-        self.first = genome_length - self._5_3_sequence.second + 1
-        self.second = (self._5_3_sequence.second -
-                       self._5_3_sequence.first + self.first)
-        return RangeLocation('{}..{}'.format(self.first, self.second))
+    def get_translated_joined(self, genome_length):
+        new_locations = []
+        for location in self.locations:
+            first = genome_length - location.second + 1
+            second = location.second - location.first + first
+            new_locations.append(RangeLocation('{}..{}'.format(first, second))
+        return JoinedLocation(*new_locations)
 
-    def get_complement(self, sequence):
-        complement_location = self.calculate_3_5_positions(sequence.length())
-        return (sequence.get_complement_sequence()
-                .get_sequence_from_location(complement_location))
+    def get_complement_sequences(self, sequence):
+        sequences = []
+        locations = self.get_translated_joined(sequence.lenght()).locations
+        complement_sequence = sequence.get_complement_sequence()
+        for location in locations:
+           sequences.append(complement_sequence
+                            .get_sequence_from_location(location))
+        return sequences
 
 
 def _convert(var_type, string):
